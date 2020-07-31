@@ -11,9 +11,14 @@ app.use(helmet());
 app.use(cors());
 
 require('./startup/routes')(app);
-//require('./startup/cors')(app);
 require('./startup/db')();
+require('./startup/validation')();
 debug('Connected to the database...');
+
+if (!config.get('jwtPrivateKey')) {
+	console.error('FATAL ERROR: jwtPrivateKey is not defined.');
+	process.exit(1);
+}
 
 const port = process.env.PORT || 3000;
 

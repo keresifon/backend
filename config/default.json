@@ -1,0 +1,7 @@
+{
+    "name": "Mongoose Ecom",
+    "db":"mongodb://localhost:27017/ecom",
+    "jwtPrivateKey": ""
+
+    
+}

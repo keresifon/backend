@@ -1,4 +1,5 @@
-const  {Product}  = require( '../models/product');
+const  { Product }  = require( '../models/product');
+const auth = require('../middleware/auth');
 const express = require('express');
 const router = express.Router();
 
@@ -21,7 +22,7 @@ router.post('/',  async (req, res) => {
 		category: req.body.category,
 		trending: req.body.trending,
 		countInStock: req.body.countInStock,
-		tags: req.body.tags
+		tags: req.body.tags,
 		//date: { type: Date, default: Date.now },
 	  
 	});
@@ -29,6 +30,21 @@ router.post('/',  async (req, res) => {
 	
 	res.send(products);
   });
-  
 
+  router.delete('/:id', auth, async (req, res) => {
+	const product = await Product.findByIdAndRemove(req.params.id);
+  
+	if (!product) return res.status(404).send('The product with the given ID was not found.');
+  
+	res.send(product);
+  });
+
+
+router.get('/:id', async (req, res) => {
+	const product = await Product.findById(req.params.id);
+  
+	if (!product) return res.status(404).send('The product with the given ID was not found.');
+  
+	res.send(product);
+  });
 module.exports = router;
