@@ -1,4 +1,5 @@
 {
-    "db": "MONGO_DB",
-    "jwtPrivateKey": "ecom_jwtPrivateKey"
+    "jwtPrivateKey": "ecom_jwtPrivateKey",
+    "db": "MONGO_DB"
+    
 }
