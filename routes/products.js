@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 	res.send(products);
 });
 
-router.post('/',  async (req, res) => {
+router.post('/', auth,  async (req, res) => {
 	//const { error } = validate(req.body); 
 	//if (error) return res.status(400).send(error.details[0].message);
   
@@ -23,7 +23,7 @@ router.post('/',  async (req, res) => {
 		trending: req.body.trending,
 		countInStock: req.body.countInStock,
 		tags: req.body.tags,
-		//date: { type: Date, default: Date.now },
+		date: req.body.date,
 	  
 	});
 	await products.save();

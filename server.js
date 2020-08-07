@@ -5,8 +5,10 @@ const config = require('config');
 const debug = require('debug');
 const cors = require('cors');
 const app = express();
+const bodyParser = require('body-parser');
 
-app.use(express.json());
+app.use(bodyParser.json())
+app.use(express.json())
 app.use(helmet());
 app.use(cors());
 
