@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const Order = mongoose.model(
 	'Order',
 	new mongoose.Schema({
+		transaction_ref:{
+			type: String
+		},
 		itemsOrdered: {
 			type: Array
 			
@@ -16,7 +19,8 @@ const Order = mongoose.model(
 		},
 		status: {
 			type: String,
-			maxlength: 255
+			maxlength: 255,
+			default: 'Pending'
 		},
 		paymentStatus: {
 			type: Boolean,
