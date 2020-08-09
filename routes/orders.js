@@ -61,8 +61,10 @@ router.post('/',  async (req, res) => {
 	const order = await Order.findOneAndUpdate(
 		{transaction_ref:req.params.id},
 		 { 
-			 status: req.body.status,
-			 paymentStatus : req.body.paymentStatus,
+			
+			status: req.body.status,
+			paymentStatus: req.body.paymentStatus,
+			
 			
 		  },
 	  {
@@ -73,7 +75,7 @@ router.post('/',  async (req, res) => {
   
 	if (!order)
 	  return res.status(404).send("The order does not exist.");
-	//await order.save();
+	await order.save();
 	res.send(order);
   });
 
