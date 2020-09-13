@@ -1,4 +1,6 @@
 const  { Product }  = require( '../models/product');
+const { Brand } = require('../models/brand')
+const {Category } = require('../models/category')
 const auth = require('../middleware/auth');
 const express = require('express');
 const router = express.Router();
@@ -13,13 +15,26 @@ router.post('/', auth,  async (req, res) => {
 	//const { error } = validate(req.body); 
 	//if (error) return res.status(400).send(error.details[0].message);
   
+	const brand = await Brand.findById(req.body.brandId);
+	if (!brand) return res.status(400).send('Invalid Brand.');
+
+	const category = await Category.findById(req.body.categoryId);
+	if (!category) return res.status(400).send('Invalid Category.');
+
+
 	const products = new Product({ 
 		name: req.body.name,
 		price: req.body.price,
-		brand: req.body.brand,
+		brand: {
+			_id: brand._id,
+			name: brand.name,
+		},
 		description: req.body.description,
 		image: req.body.image,
-		category: req.body.category,
+		category: {
+			_id: category._id,
+			name: category.name,
+	},
 		trending: req.body.trending,
 		countInStock: req.body.countInStock,
 		tags: req.body.tags,

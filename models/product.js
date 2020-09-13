@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
+const { brandSchema } = require('./brand');
+const { categorySchema } = require('./category');
 
 const Product = mongoose.model(
 	'Product',
 	new mongoose.Schema({
 		name: String,
 		price: Number,
-		brand: String,
+		brand: {
+			type:brandSchema
+		},
 		description: String,
 		image: String,
-		category: String,
+		category: {
+			type:categorySchema,
+		},
 		trending: Boolean,
 		countInStock: Number,
 		tags: [String],
